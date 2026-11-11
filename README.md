@@ -1,60 +1,33 @@
-# AI Engineering Team Skills Pack
+# MausBot Curated Skill Stack
 
-Bộ Agent Skills được thiết kế cho team AI đa vai trò: Software Architect, Senior Developer, UI/UX Specialist và QA & Security Reviewer.
+Bản phân bổ skill đề xuất cho 4 bot của team:
+1. Software Architect
+2. Senior Developer
+3. UI/UX Specialist
+4. QA & Code Reviewer
 
-## Mục tiêu
+Đây là gói cấu hình/phân bổ, không phải công cụ tự đăng nhập MausBot để cài đặt. Các skill bên thứ ba cần được import trong giao diện MausBot, sau khi kiểm tra nội dung và quyền.
 
-- Biến yêu cầu mơ hồ thành kế hoạch có tiêu chí nghiệm thu.
-- Khảo sát codebase trước khi thay đổi.
-- Chia việc theo vai trò, tránh nhiều agent sửa cùng một vùng code.
-- Code có kiểm thử, review độc lập và báo cáo bằng bằng chứng.
-- Ưu tiên an toàn: không tự ý deploy, migration, xoá dữ liệu, thay đổi production hoặc lộ secrets.
+## Nguyên tắc tuyển chọn
+- Chọn theo nhiệm vụ của bot, không chọn chỉ vì install count cao.
+- Mỗi bot có 3–4 skill chuyên môn; shared workflow giữ ở Group Instructions.
+- Không bật skill đòi hỏi tool chưa có.
+- Không để UI/UX tự ý sửa domain logic; QA không tự sửa code khi đang review.
+- Không cài skill yêu cầu chạy lệnh ngoài ý muốn, gửi telemetry không rõ ràng hoặc truy cập production.
+- Install count là tín hiệu phổ biến, không phải bằng chứng chất lượng/an toàn.
 
-## Cấu trúc
+## Ma trận skill
+Xem `BOT_SKILL_MATRIX.md`.
 
-```text
-ai-engineering-team-skills/
-├── README.md
-├── INSTALL.md
-├── TEAM_WORKFLOW.md
-├── prompts/
-│   ├── team-bootstrap.md
-│   ├── task-intake.md
-│   └── security-audit-readonly.md
-└── skills/
-    ├── shared/
-    │   ├── engineering-workflow/SKILL.md
-    │   ├── project-context/SKILL.md
-    │   └── evidence-based-reporting/SKILL.md
-    ├── software-architect/
-    │   ├── software-architecture/SKILL.md
-    │   ├── technical-planning/SKILL.md
-    │   └── codebase-audit/SKILL.md
-    ├── senior-developer/
-    │   ├── implementation/SKILL.md
-    │   ├── debugging/SKILL.md
-    │   ├── test-driven-development/SKILL.md
-    │   └── refactoring/SKILL.md
-    ├── ui-ux-specialist/
-    │   ├── ui-ux-design/SKILL.md
-    │   ├── mobile-ux/SKILL.md
-    │   └── accessibility/SKILL.md
-    └── qa-security-reviewer/
-        ├── code-review/SKILL.md
-        ├── testing-strategy/SKILL.md
-        └── security-audit/SKILL.md
-```
+## Cài đặt
+Xem `MAUSBOT_IMPORT_GUIDE.md`.
 
-## Thiết kế quan trọng
+## Prompt cấu hình
+- `bot-instructions/01-software-architect.md`
+- `bot-instructions/02-senior-developer.md`
+- `bot-instructions/03-ui-ux-specialist.md`
+- `bot-instructions/04-qa-security-reviewer.md`
+- `GROUP_INSTRUCTIONS.md`
 
-Skill là hướng dẫn vận hành cho agent, không phải model hay quyền truy cập công cụ. Agent chỉ có thể thực hiện thao tác nếu ứng dụng chủ (MausBot/Codex/Antigravity/MuseAI) cấp công cụ, quyền file và môi trường thực thi tương ứng.
-
-Các skill trong gói là nội dung gốc, được viết để dùng làm nền tảng và cần được điều chỉnh theo stack/quy trình của từng repository. Không có skill nào bảo đảm code luôn đúng; cần chạy test và review thực tế.
-
-## Cách dùng nhanh
-
-1. Giải nén ZIP.
-2. Mở `INSTALL.md`.
-3. Cài các thư mục skill phù hợp vào từng bot. Nếu nền tảng chỉ nhận một `SKILL.md`, hãy thêm từng skill riêng.
-4. Dán `prompts/team-bootstrap.md` vào Group Instructions.
-5. Mỗi task phải nêu rõ repository, mục tiêu và phạm vi quyền.
+## Giới hạn đã biết
+Skills.sh là directory/CLI ecosystem. `npx skills add` hỗ trợ nhiều coding agents, nhưng không có bằng chứng trong tài liệu đã kiểm tra rằng MausBot được CLI hỗ trợ trực tiếp. Vì vậy gói này hướng dẫn import skill qua Library > Skills của MausBot bằng URL GitHub folder/SKILL.md, rồi xác minh từng bot đã đọc được nội dung.
